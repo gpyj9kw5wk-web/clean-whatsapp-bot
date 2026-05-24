@@ -1,0 +1,33 @@
+<html>
+<body style="background:#111;color:white;font-family:sans-serif;padding:30px">
+
+<h2>LOGIN</h2>
+
+<input id="u" placeholder="username"><br><br>
+<input id="p" placeholder="password" type="password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script>
+async function login() {
+  const res = await fetch("/auth/login", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      username: document.getElementById("u").value,
+      password: document.getElementById("p").value
+    })
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    window.location.href = "/";
+  } else {
+    alert("Wrong login");
+  }
+}
+</script>
+
+</body>
+</html>
